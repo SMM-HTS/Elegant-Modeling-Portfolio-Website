@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elena Marie | Modest Fashion Model</title>
+    <style>
+        :root {
+            --cream: #f9f5f0;
+            --taupe: #d8c4b6;
+            --brown: #6b5b4d;
+            --black: #1a1a1a;
+            --white: #ffffff;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            color: var(--black);
+            background-color: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3 {
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 1px solid var(--brown);
+            color: var(--brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            background: var(--brown);
+            color: var(--cream);
+        }
+        header {
+            position: fixed;
+            width: 100%;
+            padding: 20px 0;
+            z-index: 100;
+            background: rgba(249, 245, 240, 0.9);
+            transition: all 0.3s ease;
+        }
+        header.scrolled {
+            padding: 15px 0;
+            background: rgba(249, 245, 240, 0.95);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 500;
+        }
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        nav ul li {
+            margin-left: 30px;
+        }
+        nav ul li a {
+            font-size: 16px;
+            position: relative;
+        }
+        nav ul li a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background: var(--brown);
+            transition: width 0.3s ease;
+        }
+        nav ul li a:hover:after {
+            width: 100%;
+        }
+        .mobile-menu-btn {
+            display: none;
+            cursor: pointer;
+            font-size: 24px;
+        }
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-image {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+        .hero-content {
+            max-width: 600px;
+            padding: 0 20px;
+        }
+        .hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 30px;
+        }
+        section {
+            padding: 100px 0;
+        }
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            font-size: 36px;
+        }
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        .about-text {
+            flex: 1;
+        }
+        .about-text h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 2/3;
+        }
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .portfolio-item:hover img {
+            transform: scale(1.05);
+        }
+        .portfolio-item-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .portfolio-item:hover .portfolio-item-overlay {
+            opacity: 1;
+        }
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .blog-card {
+            background: var(--white);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .blog-card-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.1);
+        }
+        .blog-card-content {
+            padding: 20px;
+        }
+        .blog-card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        .blog-card p {
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .blog-card .btn {
+            padding: 8px 20px;
+            font-size: 14px;
+        }
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        .contact-info {
+            flex: 1;
+        }
+        .contact-info h3 {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .contact-info p {
+            margin-bottom: 30px;
+        }
+        .contact-rates {
+            margin-top: 30px;
+        }
+        .contact-rates h4 {
+            font-size: 18px;
+            margin-bottom: 15px;
+        }
+        .contact-rates ul {
+            list-style: none;
+        }
+        .contact-rates li {
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            max-width: 300px;
+        }
+        .contact-form {
+            flex: 1;
+            background: var(--white);
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 16px;
+        }
+        .form-group textarea {
+            height: 150px;
+        }
+        .instagram-feed {
+            background: var(--white);
+            padding: 40px;
+            text-align: center;
+            margin-top: 60px;
+        }
+        .instagram-feed h3 {
+            font-size: 24px;
+            margin-bottom: 30px;
+        }
+        .instagram-posts {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .instagram-post {
+            aspect-ratio: 1/1;
+            overflow: hidden;
+        }
+        .instagram-post img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        .instagram-post:hover img {
+            transform: scale(1.1);
+        }
+        footer {
+            background: var(--brown);
+            color: var(--cream);
+            padding: 50px 0 20px;
+            text-align: center;
+        }
+        .footer-logo {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        .footer-links li {
+            margin: 0 15px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        .page.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            nav {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--cream);
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+                transform: translateY(-150%);
+                transition: transform 0.3s ease;
+            }
+            nav.active {
+                transform: translateY(0);
+            }
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .hero h1 {
+                font-size: 36px;
+            }
+            .hero p {
+                font-size: 18px;
+            }
+            .section-title {
+                font-size: 30px;
+            }
+        }
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            .hero p {
+                font-size: 16px;
+            }
+            section {
+                padding: 60px 0;
+            }
+            .contact-form {
+                padding: 20px;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header id="header">
+        <div class="container header-container">
+            <a href="#" class="logo" data-page="home">Elena Marie</a>
+            <div class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#" data-page="home">Home</a></li>
+                    <li><a href="#" data-page="about">About</a></li>
+                    <li><a href="#" data-page="portfolio">Portfolio</a></li>
+                    <li><a href="#" data-page="blog">Blog</a></li>
+                    <li><a href="#" data-page="contact">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page active" id="home">
+            <div class="hero">
+                <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Elena Marie" class="hero-image">
+                <div class="hero-content">
+                    <h1 style="color: white;">Elena Marie</h1>
+                    <p style="color: white;">Modest fashion model & creative storyteller</p>
+                    <a style="color: white; border: 1px solid white;" href="#" class="btn" data-page="portfolio">View Portfolio</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="about">
+            <div class="container">
+                <h2 class="section-title">About Me</h2>
+                <div class="about-content">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="About Elena Marie">
+                    </div>
+                    <div class="about-text">
+                        <h2>Hello, I'm Elena</h2>
+                        <p>I'm a freelance model specializing in modest fashion, working with brands that value elegance, sophistication, and timeless style. My journey in fashion began as a personal exploration of self-expression while staying true to my values.</p>
+                        <p>With over five years of experience in the industry, I've had the privilege of collaborating with designers, photographers, and brands who share my vision of modest fashion as a powerful form of creative expression.</p>
+                        <p>When I'm not in front of the camera, I'm passionate about mentoring young models and writing about the intersection of faith, fashion, and femininity in today's world.</p>
+                        <a href="#" class="btn" data-page="contact">Work With Me</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="portfolio">
+            <div class="container">
+                <h2 class="section-title">Portfolio</h2>
+                <div class="portfolio-grid">
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fashion Campaign">
+                        <div class="portfolio-item-overlay">
+                            <h3>Spring Collection</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Editorial Shoot">
+                        <div class="portfolio-item-overlay">
+                            <h3>Editorial</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Runway Show">
+                        <div class="portfolio-item-overlay">
+                            <h3>Runway</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Lifestyle Shoot">
+                        <div class="portfolio-item-overlay">
+                            <h3>Lifestyle</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Beauty Campaign">
+                        <div class="portfolio-item-overlay">
+                            <h3>Beauty</h3>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="https://images.unsplash.com/photo-1554412933-514a83d2f3c8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Bridal Shoot">
+                        <div class="portfolio-item-overlay">
+                            <h3>Bridal</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="blog">
+            <div class="container">
+                <h2 class="section-title">Blog</h2>
+                <div class="blog-grid">
+                    <div class="blog-card">
+                        <div class="blog-card-image">
+                            <img src="https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>The Art of Modest Fashion</h3>
+                            <p>Exploring how modest fashion is redefining modern elegance and empowering women to express their style on their own terms.</p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-card-image">
+                            <img src="https://images.unsplash.com/photo-1490114538077-0a7f8cb49891?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Behind the Scenes: Spring Campaign</h3>
+                            <p>A personal account of my experience shooting the latest spring collection with emerging modest fashion designers.</p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                    <div class="blog-card">
+                        <div class="blog-card-image">
+                            <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-card-content">
+                            <h3>Building a Personal Brand in Fashion</h3>
+                            <p>Practical tips for models and creatives looking to establish their unique voice in the competitive world of fashion.</p>
+                            <a href="#" class="btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="page" id="contact">
+            <div class="container">
+                <h2 class="section-title">Contact</h2>
+                <div class="contact-container">
+                    <div class="contact-info">
+                        <h3>Let's Work Together</h3>
+                        <p>I'm available for modeling projects, brand collaborations, and creative partnerships. Feel free to reach out with any inquiries or project proposals.</p>
+                        <p><strong>Email:</strong> hello@elenamarie.com</p>
+                        <p><strong>Phone:</strong> (123) 456-7890</p>
+                        <div class="contact-rates">
+                            <h4>Modeling Rates</h4>
+                            <ul>
+                                <li><span>Half Day (4 hours)</span> <span>$800</span></li>
+                                <li><span>Full Day (8 hours)</span> <span>$1,500</span></li>
+                                <li><span>Editorial Shoot</span> <span>$2,000+</span></li>
+                                <li><span>Commercial Campaign</span> <span>$3,000+</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-group">
+                                <label for="name">Name</label>
+                                <input type="text" id="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject</label>
+                                <select id="subject">
+                                    <option value="modeling">Modeling Inquiry</option>
+                                    <option value="collaboration">Collaboration</option>
+                                    <option value="press">Press</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <textarea id="message" required></textarea>
+                            </div>
+                            <button type="submit" class="btn">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="instagram-feed">
+                    <h3>Follow My Journey</h3>
+                    <div class="instagram-posts">
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1483181957632-8bda974cbc91?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                        <div class="instagram-post">
+                            <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-1.2.1&auto=format&fit=crop&w=200&q=80" alt="Instagram Post">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">Elena Marie</div>
+            <ul class="footer-links">
+                <li><a href="#" data-page="home">Home</a></li>
+                <li><a href="#" data-page="about">About</a></li>
+                <li><a href="#" data-page="portfolio">Portfolio</a></li>
+                <li><a href="#" data-page="blog">Blog</a></li>
+                <li><a href="#" data-page="contact">Contact</a></li>
+            </ul>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-pinterest"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+            <p class="copyright">© 2025 Elena Marie. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mainNav = document.getElementById('mainNav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.querySelector('i').classList.toggle('fa-bars');
+                this.querySelector('i').classList.toggle('fa-times');
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('data-page');
+                    if (targetId) {
+                        showPage(targetId);
+                        if (mainNav.classList.contains('active')) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.querySelector('i').classList.remove('fa-times');
+                            mobileMenuBtn.querySelector('i').classList.add('fa-bars');
+                        }
+                    }
+                });
+            });
+            
+            // Page navigation
+            function showPage(pageId) {
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                document.getElementById(pageId).classList.add('active');
+                window.scrollTo(0, 0);
+                
+                // Update URL without reload
+                history.pushState(null, null, `#${pageId}`);
+            }
+            
+            // Check initial URL hash
+            if (window.location.hash) {
+                const pageId = window.location.hash.substring(1);
+                showPage(pageId);
+            }
+            
+            // Header scroll effect
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+            
+            // Contact form submission
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    alert('Thank you for your message! I will get back to you soon.');
+                    this.reset();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
